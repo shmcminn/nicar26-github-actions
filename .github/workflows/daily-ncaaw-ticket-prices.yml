@@ -2,6 +2,8 @@ name: Daily Big Ten WBB Session 3 Price
 
 on:
   schedule:
+    # Cron format is: minute hour day-of-month month day-of-week (in UTC on GitHub).
+    # This runs at minute 0, hour 9 UTC, every day, only in Nov-Apr.
     # 4am ET during standard time (09:00 UTC), only Nov-Apr.
     - cron: "0 9 * 11,12,1,2,3,4 *"
   workflow_dispatch:
@@ -10,7 +12,11 @@ permissions:
   contents: write
 
 jobs:
+  # "jobs" is where you define one or more units of work in the workflow.
+  # Each job can have its own runner and its own list of steps.
   fetch-stubhub-prices:
+    # "runs-on" picks the machine image GitHub provides for this job.
+    # ubuntu-latest means a fresh Linux runner for each run.
     runs-on: ubuntu-latest
     steps:
       # Pull repository files onto the runner.
@@ -63,6 +69,8 @@ jobs:
       # Commit and push the updated history CSV plus sanitized HTML snapshot.
       - name: Commit updated files if changed
         run: |
+          # The GitHub Actions runner is a temporary machine with no git identity set.
+          # We set a bot name/email here so git allows creating a commit.
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \

@@ -79,6 +79,7 @@ Current Odds API request in this repo:
 - `.github/workflows/` GitHub Actions workflow files
 - `scripts/` small utility scripts used by Actions
 - `data/raw/` raw API/page snapshots
+- `data/raw_public/` sanitized HTML snapshots committed for classroom inspection
 - `data/` append-only or day-partitioned CSV outputs
 
 ## Teaching Notes
