@@ -11,10 +11,6 @@ Use this mental model for most newsroom automation:
 3. **Python step** parses/cleans raw data and appends rows to a CSV in `data/`.
 4. **Commit step** uses bot identity + `git add` + `git commit` + `git push` so the repo stores the new snapshot.
 
-In this repo, you can see that pattern in:
-- `/Users/smcminn/Documents/projects/conferences/nicar26/github-actions/.github/workflows/daily-ncaaw-ticket-prices.yml`
-- `/Users/smcminn/Documents/projects/conferences/nicar26/github-actions/.github/workflows/daily-wncaab-odds.yml`
-
 ## 2) Run `workflow_dispatch` + Check Logs (Step by Step)
 
 1. Open your repo on GitHub.com.
@@ -22,13 +18,13 @@ In this repo, you can see that pattern in:
 3. Select a workflow in the left panel.
 4. Click **Run workflow** (top right), choose branch (`main`), click **Run workflow** again.
 5. Open the new run at the top of the list.
-6. Click the job name (for example, `fetch-wncaab-odds`).
+6. Click the job name.
 7. Open each step and read logs in order:
    - checkout/setup
    - fetch raw data
    - parse/build CSV
    - commit/push
-8. Confirm output files changed in the repo (`data/` and/or `data/raw_public/`).
+8. Confirm output files changed in the repo (for example, in `data/` or another output folder you track).
 
 Quick triage:
 - `exit code 3` from `curl`: malformed URL or bad secret formatting.
@@ -47,7 +43,7 @@ Track two buckets:
 
 2. **Data/API provider quotas**
    - API credits/requests (often the first limit you hit).
-   - For this repo, monitor The Odds API usage and keep `markets=h2h` only to control request cost.
+   - Monitor your provider's usage dashboard and minimize unnecessary request volume.
 
 Good safeguards:
 - Keep workflows short.
