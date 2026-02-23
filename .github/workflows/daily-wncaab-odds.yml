@@ -36,8 +36,21 @@ jobs:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
         run: |
           mkdir -p data/raw
-          curl -s \
-            "https://api.the-odds-api.com/v4/sports/basketball_wncaab/odds/?apiKey=${THE_ODDS_API_KEY}&regions=us&markets=h2h&oddsFormat=american&dateFormat=iso" \
+          # Trim accidental line breaks from the stored secret value.
+          CLEAN_ODDS_API_KEY="$(printf '%s' "${THE_ODDS_API_KEY}" | tr -d '\r\n')"
+          # Stop early with a clear message if the secret is missing.
+          if [ -z "${CLEAN_ODDS_API_KEY}" ]; then
+            echo "THE_ODDS_API_KEY is missing or empty."
+            exit 1
+          fi
+          # Build query params with curl flags to avoid malformed URL errors.
+          curl -sS --fail --get \
+            "https://api.the-odds-api.com/v4/sports/basketball_wncaab/odds/" \
+            --data-urlencode "apiKey=${CLEAN_ODDS_API_KEY}" \
+            --data-urlencode "regions=us" \
+            --data-urlencode "markets=h2h" \
+            --data-urlencode "oddsFormat=american" \
+            --data-urlencode "dateFormat=iso" \
             -o "data/raw/wncaab_odds_${RUN_TIMESTAMP_FILE_ET}.json"
 
       # Transform raw JSON into append-only CSV rows.
