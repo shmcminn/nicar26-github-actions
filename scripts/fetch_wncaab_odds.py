@@ -2,10 +2,9 @@
 """Read raw WNCAAB odds JSON and append tidy rows to a CSV."""
 
 import argparse
+import csv
 import json
 from pathlib import Path
-
-import pandas as pd
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,7 +30,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def to_rows(events: list[dict], snapshot_date: str, snapshot_timestamp: str) -> pd.DataFrame:
+def to_rows(events: list[dict], snapshot_date: str, snapshot_timestamp: str) -> list[dict]:
     rows: list[dict] = []
     for event in events:
         event_id = event.get("id", "")
@@ -69,38 +68,44 @@ def to_rows(events: list[dict], snapshot_date: str, snapshot_timestamp: str) -> 
                         "draw_price": outcomes.get("Draw"),
                     }
                 )
-    if not rows:
-        return pd.DataFrame(
-            columns=[
-                "snapshot_date",
-                "snapshot_timestamp",
-                "event_id",
-                "sport_key",
-                "sport_title",
-                "commence_time",
-                "home_team",
-                "away_team",
-                "bookmaker_key",
-                "bookmaker_title",
-                "bookmaker_last_update",
-                "market_key",
-                "market_last_update",
-                "home_price",
-                "away_price",
-                "draw_price",
-            ]
-        )
-    return pd.DataFrame(rows)
+    return rows
+
+
+def append_rows_to_csv(path: Path, rows: list[dict]) -> None:
+    fieldnames = [
+        "snapshot_date",
+        "snapshot_timestamp",
+        "event_id",
+        "sport_key",
+        "sport_title",
+        "commence_time",
+        "home_team",
+        "away_team",
+        "bookmaker_key",
+        "bookmaker_title",
+        "bookmaker_last_update",
+        "market_key",
+        "market_last_update",
+        "home_price",
+        "away_price",
+        "draw_price",
+    ]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    file_exists = path.exists()
+    with path.open("a", newline="", encoding="utf-8") as csv_file:
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
 
 
 def main() -> None:
     args = parse_args()
     events = json.loads(args.input_json.read_text(encoding="utf-8"))
 
-    df = to_rows(events, args.date, args.timestamp)
-    args.csv.parent.mkdir(parents=True, exist_ok=True)
-    file_exists = args.csv.exists()
-    df.to_csv(args.csv, index=False, mode="a", header=not file_exists)
+    rows = to_rows(events, args.date, args.timestamp)
+    append_rows_to_csv(args.csv, rows)
 
 
 if __name__ == "__main__":
