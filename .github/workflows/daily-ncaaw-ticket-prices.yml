@@ -46,13 +46,27 @@ jobs:
             --stubhub-html "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
             --history-csv "data/stubhub_big10wbt_session3_history.csv"
 
-      # Commit and push only when data changed.
+      # Build a student-visible HTML snapshot with token-like values redacted.
+      - name: Create sanitized HTML snapshot
+        run: |
+          mkdir -p data/raw_public
+          cp \
+            "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
+            "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html"
+          perl -0777 -i -pe '
+            s/"([^"]*(?:key|token|secret|client_id|client_key|app_insights|oid)[^"]*)":"[^"]*"/"$1":"[REDACTED]"/gi;
+            s/"(googleRecaptchaV[23]Key|binaryNow)":"?[^",}]*"?/"$1":"[REDACTED]"/g;
+            s/pk\.[A-Za-z0-9._-]+/[REDACTED_MAPBOX_TOKEN]/g;
+            s/AIza[0-9A-Za-z_-]{20,}/[REDACTED_GOOGLE_KEY]/g;
+          ' "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html"
+
+      # Commit and push the updated history CSV plus sanitized HTML snapshot.
       - name: Commit updated files if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
+            "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html" \
             "data/stubhub_big10wbt_session3_history.csv"
           if git diff --cached --quiet; then
             echo "No data changes detected."

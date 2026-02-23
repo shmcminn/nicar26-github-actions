@@ -27,8 +27,11 @@ Script:
 - `scripts/analyze_stubhub_big10wbt.py`
 
 Outputs:
-- `data/raw/stubhub_session3_event_YYYYMMDD.html`
+- `data/raw_public/stubhub_session3_event_YYYYMMDD.html` (sanitized, student-visible snapshot)
 - `data/stubhub_big10wbt_session3_history.csv`
+
+Note:
+- The workflow downloads raw HTML during the run into `data/raw/` (ignored), then commits a sanitized copy to `data/raw_public/`.
 
 ### 2) API Key Example: WNCAAB Odds Workflow
 
@@ -48,13 +51,21 @@ Outputs:
 - `data/raw/wncaab_odds_YYYYMMDD_HHMMSS.json`
 - `data/wncaab_odds_YYYYMMDD.csv`
 
-## The Odds API Key Setup (GitHub)
+## GitHub.com Setup (One Time)
+
+1. In your repository, go to `Settings` -> `Actions` -> `General`.
+2. Under `Actions permissions`, allow actions to run (either all actions, or at minimum `actions/checkout` and `actions/setup-python`).
+3. Under `Workflow permissions`, choose `Read and write permissions`.
+4. Save.
+
+## The Odds API Secret Setup (GitHub)
 
 1. Sign up for an API key at [the-odds-api.com](https://the-odds-api.com/).
 2. In your GitHub repository, go to `Settings` -> `Secrets and variables` -> `Actions`.
 3. Click `New repository secret`.
 4. Set `Name` to `THE_ODDS_API_KEY`.
-5. Paste your key as the secret value and save.
+5. Paste only the raw key as the secret value and save.
+6. Do not include `THE_ODDS_API_KEY=` in the value field.
 
 Current Odds API request in this repo:
 - `sport=basketball_wncaab`
