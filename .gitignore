@@ -1,0 +1,6 @@
+.env
+__pycache__/
+AGENT_HANDOFF.md
+
+# Raw HTML snapshots may contain embedded third-party tokens
+data/raw/*.html

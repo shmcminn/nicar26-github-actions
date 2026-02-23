@@ -1,0 +1,62 @@
+name: Daily Big Ten WBB Session 3 Price
+
+on:
+  schedule:
+    # 4am ET during standard time (09:00 UTC), only Nov-Apr.
+    - cron: "0 9 * 11,12,1,2,3,4 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-stubhub-prices:
+    runs-on: ubuntu-latest
+    steps:
+      # Pull repository files onto the runner.
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Install Python so we can run the StubHub analysis script.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Compute today's date in Eastern Time for file naming.
+      - name: Set ET date
+        run: |
+          echo "TARGET_DATE_ET=$(TZ=America/New_York date +%Y%m%d)" >> "$GITHUB_ENV"
+          echo "RUN_TIMESTAMP_ET=$(TZ=America/New_York date '+%Y-%m-%d %H:%M:%S %Z')" >> "$GITHUB_ENV"
+
+      # Download the tournament page HTML into data/raw.
+      - name: Download StubHub raw HTML
+        run: |
+          mkdir -p data/raw
+          curl -s \
+            "https://www.stubhub.com/big-ten-women-s-basketball-tournament-indianapolis-tickets-3-5-2026/event/157634620/" \
+            -o "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html"
+
+      # Analyze raw HTML for Session 3 only (event id 157634620).
+      - name: Analyze Session 3 price
+        run: |
+          python scripts/analyze_stubhub_big10wbt.py \
+            --date "${TARGET_DATE_ET}" \
+            --timestamp "${RUN_TIMESTAMP_ET}" \
+            --stubhub-html "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
+            --history-csv "data/stubhub_big10wbt_session3_history.csv"
+
+      # Commit and push only when data changed.
+      - name: Commit updated files if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
+            "data/stubhub_big10wbt_session3_history.csv"
+          if git diff --cached --quiet; then
+            echo "No data changes detected."
+          else
+            git commit -m "Update StubHub Session 3 price for ${TARGET_DATE_ET}"
+            git push
+          fi

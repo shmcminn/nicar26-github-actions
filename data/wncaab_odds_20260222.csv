@@ -1,0 +1,3 @@
+snapshot_date,snapshot_timestamp,event_id,sport_key,sport_title,commence_time,home_team,away_team,bookmaker_key,bookmaker_title,bookmaker_last_update,market_key,market_last_update,home_price,away_price,draw_price
+20260222,2026-02-22 20:49:24 EST,0e26f6bacdfefe9ab56cb3112c151d31,basketball_wncaab,WNCAAB,2026-02-24T00:00:00Z,Baylor Bears,Kansas St Wildcats,draftkings,DraftKings,2026-02-23T01:48:53Z,h2h,2026-02-23T01:48:53Z,-520,390,
+20260222,2026-02-22 20:49:24 EST,a3101113d21e617341fd5108852b0845,basketball_wncaab,WNCAAB,2026-02-24T00:30:00Z,Auburn Tigers,Georgia Bulldogs,draftkings,DraftKings,2026-02-23T01:48:53Z,h2h,2026-02-23T01:48:53Z,230,-285,
