@@ -1,11 +1,10 @@
-name: Daily Big Ten WBB Session 3 Price
+name: Daily Big Ten WBB Session 7 Price
 
 on:
   schedule:
     # Cron format is: minute hour day-of-month month day-of-week (in UTC on GitHub).
-    # This runs at minute 0, hour 9 UTC, every day, only in Nov-Apr.
-    # 4am ET during standard time (09:00 UTC), only Nov-Apr.
-    - cron: "0 9 * 11,12,1,2,3,4 *"
+    # This runs at minute 0, every 2nd hour, every day, only in Nov-Apr.
+    - cron: "0 */2 * 11,12,1,2,3,4 *"
   workflow_dispatch:
 
 permissions:
@@ -40,31 +39,31 @@ jobs:
         run: |
           mkdir -p data/raw
           curl -s \
-            "https://www.stubhub.com/big-ten-women-s-basketball-tournament-indianapolis-tickets-3-5-2026/event/157634620/" \
-            -o "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html"
+            "https://www.stubhub.com/big-ten-women-s-basketball-tournament-indianapolis-tickets-3-8-2026/event/158891615/" \
+            -o "data/raw/stubhub_session7_event_${TARGET_DATE_ET}.html"
 
-      # Analyze raw HTML for Session 3 only (event id 157634620).
-      - name: Analyze Session 3 price
+      # Analyze raw HTML for Session 7 only (event id 158891615).
+      - name: Analyze Session 7 price
         run: |
           python scripts/analyze_stubhub_big10wbt.py \
             --date "${TARGET_DATE_ET}" \
             --timestamp "${RUN_TIMESTAMP_ET}" \
-            --stubhub-html "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
-            --history-csv "data/stubhub_big10wbt_session3_history.csv"
+            --stubhub-html "data/raw/stubhub_session7_event_${TARGET_DATE_ET}.html" \
+            --history-csv "data/stubhub_big10wbt_session7_history.csv"
 
       # Build a student-visible HTML snapshot with token-like values redacted.
       - name: Create sanitized HTML snapshot
         run: |
           mkdir -p data/raw_public
           cp \
-            "data/raw/stubhub_session3_event_${TARGET_DATE_ET}.html" \
-            "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html"
+            "data/raw/stubhub_session7_event_${TARGET_DATE_ET}.html" \
+            "data/raw_public/stubhub_session7_event_${TARGET_DATE_ET}.html"
           perl -0777 -i -pe '
             s/"([^"]*(?:key|token|secret|client_id|client_key|app_insights|oid)[^"]*)":"[^"]*"/"$1":"[REDACTED]"/gi;
             s/"(googleRecaptchaV[23]Key|binaryNow)":"?[^",}]*"?/"$1":"[REDACTED]"/g;
             s/pk\.[A-Za-z0-9._-]+/[REDACTED_MAPBOX_TOKEN]/g;
             s/AIza[0-9A-Za-z_-]{20,}/[REDACTED_GOOGLE_KEY]/g;
-          ' "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html"
+          ' "data/raw_public/stubhub_session7_event_${TARGET_DATE_ET}.html"
 
       # Commit and push the updated history CSV plus sanitized HTML snapshot.
       - name: Commit updated files if changed
@@ -74,11 +73,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            "data/raw_public/stubhub_session3_event_${TARGET_DATE_ET}.html" \
-            "data/stubhub_big10wbt_session3_history.csv"
+            "data/raw_public/stubhub_session7_event_${TARGET_DATE_ET}.html" \
+            "data/stubhub_big10wbt_session7_history.csv"
           if git diff --cached --quiet; then
             echo "No data changes detected."
           else
-            git commit -m "Update StubHub Session 3 price for ${TARGET_DATE_ET}"
+            git commit -m "Update StubHub Session 7 price for ${TARGET_DATE_ET}"
             git push
           fi

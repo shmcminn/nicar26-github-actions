@@ -12,14 +12,14 @@ Automate routine data pulls so updates happen while you sleep, with practical ne
 
 ## What Is Included
 
-### 1) Main Class Example: StubHub Session 3 Price Workflow
+### 1) Main Class Example: StubHub Session 7 Price Workflow
 
 File:
 - `.github/workflows/daily-ncaaw-ticket-prices.yml`
 
 What it does:
 - Runs on schedule (Nov-Apr) and manual dispatch
-- Downloads raw StubHub Session 3 event HTML from https://www.stubhub.com/big-ten-women-s-basketball-tournament-indianapolis-tickets-3-5-2026/event/157634620/
+- Downloads raw StubHub Session 7 event HTML from https://www.stubhub.com/big-ten-women-s-basketball-tournament-indianapolis-tickets-3-8-2026/event/158891615/
 - Runs a Python script to extract low/median/high from embedded event payload
 - Appends one timestamped row to a single history CSV on each run
 
@@ -27,8 +27,8 @@ Script:
 - `scripts/analyze_stubhub_big10wbt.py`
 
 Outputs:
-- `data/raw_public/stubhub_session3_event_YYYYMMDD.html` (sanitized, student-visible snapshot)
-- `data/stubhub_big10wbt_session3_history.csv`
+- `data/raw_public/stubhub_session7_event_YYYYMMDD.html` (sanitized, student-visible snapshot)
+- `data/stubhub_big10wbt_session7_history.csv`
 
 Note:
 - The workflow downloads raw HTML during the run into `data/raw/` (ignored), then commits a sanitized copy to `data/raw_public/`.
