@@ -1,1 +1,7 @@
 snapshot_date,snapshot_timestamp,event_id,sport_key,sport_title,commence_time,home_team,away_team,bookmaker_key,bookmaker_title,bookmaker_last_update,market_key,market_last_update,home_price,away_price,draw_price
+20260304,2026-03-04 09:11:46 EST,994301b37631edbf6e066ef675ae74e1,basketball_wncaab,WNCAAB,2026-03-04T16:00:00Z,Kentucky Wildcats,Arkansas Razorbacks,fanduel,FanDuel,2026-03-04T14:11:31Z,h2h,2026-03-04T14:11:31Z,-8000,1400,
+20260304,2026-03-04 09:11:46 EST,545f3271a724291beb32c8555abeb9be,basketball_wncaab,WNCAAB,2026-03-04T16:00:00Z,Miami Hurricanes,Stanford Cardinal,fanduel,FanDuel,2026-03-04T14:11:31Z,h2h,2026-03-04T14:11:31Z,158,-215,
+20260304,2026-03-04 09:11:46 EST,98ad40e192aede58a2ea08adf3d8bb8a,basketball_wncaab,WNCAAB,2026-03-04T17:00:00Z,Kansas St Wildcats,Cincinnati Bearcats,betrivers,BetRivers,2026-03-04T14:11:12Z,h2h,2026-03-04T14:11:12Z,-305,215,
+20260304,2026-03-04 09:11:46 EST,98ad40e192aede58a2ea08adf3d8bb8a,basketball_wncaab,WNCAAB,2026-03-04T17:00:00Z,Kansas St Wildcats,Cincinnati Bearcats,fanduel,FanDuel,2026-03-04T14:11:31Z,h2h,2026-03-04T14:11:31Z,-310,220,
+20260304,2026-03-04 09:11:46 EST,006616b27a479416b59ce8a81660e9e9,basketball_wncaab,WNCAAB,2026-03-04T18:30:00Z,Florida Gators,Mississippi St Bulldogs,fanduel,FanDuel,2026-03-04T14:11:31Z,h2h,2026-03-04T14:11:31Z,100,-132,
+20260304,2026-03-04 09:11:46 EST,356ed4d357d6ef447e35152488a3999b,basketball_wncaab,WNCAAB,2026-03-04T20:30:00Z,Nebraska Cornhuskers,Indiana Hoosiers,fanduel,FanDuel,2026-03-04T14:11:31Z,h2h,2026-03-04T14:11:31Z,-360,250,
