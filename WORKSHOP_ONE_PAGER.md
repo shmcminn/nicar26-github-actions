@@ -33,6 +33,7 @@ Track two buckets:
 1. **GitHub Actions usage**
    - Runner minutes (private repos), artifact storage, and cache storage.
    - Check: **Repo/Org Settings -> Billing and plans -> Usage**.
+   - [GitHub Pricing](https://github.com/pricing)
 
 2. **Data/API provider quotas**
    - API credits/requests (often the first limit you hit).
@@ -42,7 +43,6 @@ Good safeguards:
 - Keep workflows short.
 - Use only needed API requests/fields.
 - Set schedules intentionally (avoid unnecessary frequency).
-- Add clear failure messages.
 
 ## 4) Newsroom Tasks That Fit GitHub Actions
 
