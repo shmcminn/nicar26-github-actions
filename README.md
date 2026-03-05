@@ -1,9 +1,5 @@
 # NICAR 2026: GitHub Actions for Data Automation
 
-This README is organized as the teaching flow for the workshop.
-
-## Session Flow
-
 ### 1) Understand what GitHub Actions are
 
 Use this basic model:
