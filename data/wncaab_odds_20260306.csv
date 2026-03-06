@@ -1,1 +1,4 @@
 snapshot_date,snapshot_timestamp,event_id,sport_key,sport_title,commence_time,home_team,away_team,bookmaker_key,bookmaker_title,bookmaker_last_update,market_key,market_last_update,home_price,away_price,draw_price
+20260306,2026-03-06 09:09:38 EST,eebf5936dcc032eaba874cf56a4653c7,basketball_wncaab,WNCAAB,2026-03-06T16:00:00Z,Duke Blue Devils,Clemson Tigers,betrivers,BetRivers,2026-03-06T14:08:58Z,h2h,2026-03-06T14:08:58Z,-910,500,
+20260306,2026-03-06 09:09:38 EST,cd7342433d69eb6fad2257d9b10cf4d6,basketball_wncaab,WNCAAB,2026-03-06T17:00:00Z,South Carolina Gamecocks,Kentucky Wildcats,betrivers,BetRivers,2026-03-06T14:08:58Z,h2h,2026-03-06T14:08:58Z,-2000,750,
+20260306,2026-03-06 09:09:38 EST,5632945e304e2346840539259c6fc2c6,basketball_wncaab,WNCAAB,2026-03-06T17:00:00Z,UCLA Bruins,Washington Huskies,betrivers,BetRivers,2026-03-06T14:08:58Z,h2h,2026-03-06T14:08:58Z,-10000,1200,
