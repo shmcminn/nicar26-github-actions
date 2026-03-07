@@ -4,7 +4,7 @@ on:
   schedule:
     # Cron format is: minute hour day-of-month month day-of-week (in UTC on GitHub).
     # This runs at minute 0, every 2nd hour, every day, only in Nov-Apr.
-    - cron: "0 */2 * 11,12,1,2,3,4 *"
+    - cron: "15 17 * 11,12,1,2,3,4 *"
   workflow_dispatch:
 
 permissions:
