@@ -1,0 +1,5 @@
+snapshot_date,snapshot_timestamp,event_id,sport_key,sport_title,commence_time,home_team,away_team,bookmaker_key,bookmaker_title,bookmaker_last_update,market_key,market_last_update,home_price,away_price,draw_price
+20260308,2026-03-08 01:08:03 EST,34ea01b9522ea02951f6087dd06c78be,basketball_wncaab,WNCAAB,2026-03-08T17:00:00Z,Duke Blue Devils,Louisville Cardinals,draftkings,DraftKings,2026-03-08T06:07:47Z,h2h,2026-03-08T06:07:47Z,-125,105,
+20260308,2026-03-08 01:08:03 EST,e45efb381b76f1e1f1f302e386689c8c,basketball_wncaab,WNCAAB,2026-03-08T18:15:00Z,UCLA Bruins,Iowa Hawkeyes,draftkings,DraftKings,2026-03-08T06:07:47Z,h2h,2026-03-08T06:07:47Z,-850,575,
+20260308,2026-03-08 01:08:03 EST,7169ea3bbc05057bf2e03191797e2fba,basketball_wncaab,WNCAAB,2026-03-08T19:00:00Z,South Carolina Gamecocks,Texas Longhorns,draftkings,DraftKings,2026-03-08T06:07:47Z,h2h,2026-03-08T06:07:47Z,-148,124,
+20260308,2026-03-08 01:08:03 EST,65f793ee90c6e845e6464689f4e2439a,basketball_wncaab,WNCAAB,2026-03-08T21:00:00Z,TCU Horned Frogs,West Virginia Mountaineers,draftkings,DraftKings,2026-03-08T06:07:47Z,h2h,2026-03-08T06:07:47Z,-166,140,
