@@ -1,0 +1,2 @@
+snapshot_date,snapshot_timestamp,event_id,sport_key,sport_title,commence_time,home_team,away_team,bookmaker_key,bookmaker_title,bookmaker_last_update,market_key,market_last_update,home_price,away_price,draw_price
+20260309,2026-03-09 00:33:00 EDT,928f96f9ad108deef9fe88fd5b804f18,basketball_wncaab,WNCAAB,2026-03-09T02:35:00Z,Colorado St Rams,Grand Canyon Antelopes,betrivers,BetRivers,2026-03-09T04:23:27Z,h2h,2026-03-09T04:23:27Z,-910,430,
